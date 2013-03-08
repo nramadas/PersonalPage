@@ -1,0 +1,77 @@
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+    background: white;
+  }
+
+  .splash {
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    width: 20%;
+    font-size: 40px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  #startSplash {
+    background: black;
+    color: white;
+  }
+
+  #winSplash {
+    display: none;
+    background: rgba(37,189,93,0.8);
+    color: white;
+  }
+
+  #loseSplash {
+    display: none;
+    background: rgba(199,34,34,0.8);
+    color: white;
+  }
+
+  #canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+
+<canvas id="canvas"></canvas>
+<div id="startSplash" class="splash">ASTEROIDS</div>
+<div id="winSplash" class="splash">You Win!</div>
+<div id="loseSplash" class="splash">You Lose</div>
+<!-- <audio id="gavel" src="gavel.wav"></audio> -->
+
+<script>
+  $(function() {
+    // document.getElementById("gavel").play();
+
+    var canvas = document.getElementById('canvas');
+
+    Asteroids.Game.xSize = $(window).width();
+    Asteroids.Game.ySize = $(window).height();
+
+    canvas.setAttribute('width', Asteroids.Game.xSize);
+    canvas.setAttribute('height', Asteroids.Game.ySize);
+
+    window.onresize = function () {
+      Asteroids.Game.xSize = $(window).width();
+      Asteroids.Game.ySize = $(window).height();
+
+      canvas.setAttribute('width', Asteroids.Game.xSize);
+      canvas.setAttribute('height', Asteroids.Game.ySize);
+    };
+
+    var context = canvas.getContext('2d');
+    var game = new Asteroids.Game(context);
+
+    var s = setTimeout(function() {
+      document.getElementById("startSplash").style.display = "none";
+      game.start();
+    },3000);
+
+  });
+</script>
