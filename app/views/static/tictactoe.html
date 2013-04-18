@@ -1,0 +1,57 @@
+<html>
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Bigelow+Rules' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Bigelow Rules', cursive;
+      font-size: 80px;
+    }
+
+    #canvas {
+      width: 306px;
+      height: 306px;
+      border: 1px solid black;
+      margin-left: calc(50% - 153px);
+    }
+
+    .square {
+      float: left;
+      width: 100px;
+      height: 70px;
+      text-align: center;
+      padding-top: 30px;
+      font-size: 30px;
+      font-family: sans-serif;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+
+    .square:hover {
+      box-shadow: 0 0 50px 5px gray inset;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>TicTacToe</h1>
+  <div id="canvas">
+  </div>
+</body>
+</html>
+<script>
+  $(function() {
+    var game = new TicTacToe.Game($('#canvas'));
+
+    $('#canvas').on("click", ".square", function() {
+      var row = $(this).data('row');
+      var col = $(this).data('col');
+      if (game.move(row, col)) {
+        $('#canvas').off('click');
+      }
+    });
+  });
+</script>
